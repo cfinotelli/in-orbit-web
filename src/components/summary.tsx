@@ -37,7 +37,7 @@ export const Summary = () => {
 				<div className="flex items-center gap-3">
 					<InOrbitIcon />{' '}
 					<span className="text-lg font-semibold">
-						de {firstDayOfWeek} - {lastDayOfWeek}
+						{firstDayOfWeek} - {lastDayOfWeek}
 					</span>
 				</div>
 				<DialogTrigger asChild>

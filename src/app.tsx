@@ -4,9 +4,11 @@ import { EmptyGoals } from './components/empty-goals'
 import { Summary } from './components/summary'
 import { Dialog } from './components/ui/dialog'
 
+import { useState } from 'react'
 import { getSummary } from './http/get-summary'
 
 export function App() {
+	const [opened, setOpened] = useState(false)
 	const { data: summary } = useQuery({
 		queryKey: ['summary'],
 		queryFn: getSummary,
@@ -14,9 +16,10 @@ export function App() {
 	})
 
 	return (
-		<Dialog>
+		<Dialog open={opened} onOpenChange={setOpened}>
 			{summary && summary.total > 0 ? <Summary /> : <EmptyGoals />}
-			<CreateGoalDialog />
+
+			<CreateGoalDialog setOpened={setOpened} />
 		</Dialog>
 	)
 }
