@@ -5,11 +5,11 @@ import { getSummary } from '../http/get-summary'
 import { InOrbitIcon } from './in-orbit-icon'
 import { Button } from './ui/button'
 import { DialogTrigger } from './ui/dialog'
-import { OutlineButton } from './ui/outline-button'
 import { Progress, ProgressIndicator } from './ui/progress-bar'
 import { Separator } from './ui/separator'
 
 import ptBR from 'dayjs/locale/pt-br'
+import { PendingGoals } from './pending-goals'
 
 dayjs.locale(ptBR)
 
@@ -17,6 +17,7 @@ export const Summary = () => {
 	const { data: summary } = useQuery({
 		queryKey: ['summary'],
 		queryFn: getSummary,
+		staleTime: 1000 * 60,
 	})
 
 	if (!summary) {
@@ -73,26 +74,7 @@ export const Summary = () => {
 
 				<Separator />
 
-				<div className="flex gap-3 flex-wrap">
-					<OutlineButton>
-						<Plus className="size-4 text-zinc-600" />
-						Nadar
-					</OutlineButton>
-					<OutlineButton>
-						<Plus className="size-4 text-zinc-600" />
-						Fazer academia
-					</OutlineButton>
-
-					<OutlineButton>
-						<Plus className="size-4 text-zinc-600" />
-						Fazer compras no mercado nagumo
-					</OutlineButton>
-
-					<OutlineButton>
-						<Plus className="size-4 text-zinc-600" />
-						Ir para a igreja
-					</OutlineButton>
-				</div>
+				<PendingGoals />
 
 				<div className="flex flex-col gap-6">
 					<h2 className="text-cxxl font-medium">Sua semana</h2>
